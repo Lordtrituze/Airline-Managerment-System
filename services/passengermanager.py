@@ -16,7 +16,7 @@ class PassengerManager():
     def search(self, regNo):
         try:
             for p in self.passengers:
-                if p.regNo == regNo:
+                if p.regNo == regNo or p.name == regNo:
                     self.show(p)
                     return p
         except ValueError:

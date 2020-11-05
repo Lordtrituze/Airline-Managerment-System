@@ -24,7 +24,7 @@ class AircraftManager:
     def search(self, regNo):
         try:
             for a in self.aircrafts:
-                if a.regNo == regNo:
+                if a.regNo == regNo or a.name == regNo:
                     self.show(a)
                     return a
         except ValueError:

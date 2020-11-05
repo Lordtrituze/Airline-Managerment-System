@@ -4,12 +4,12 @@ class Flight:
     destination: str
     date: str
     time: str
-    regNo: str
 
-    def __init__(self, aircraft, takeoffloc, destination, date, time, regNo):
+
+    def __init__(self, aircraft, takeoffloc, destination, date, time, flightNo):
         self.aircraft = aircraft
         self.takeoffloc = takeoffloc
         self.destination = destination
         self.date = date
         self.time = time
-        self.regNo = regNo
+        self.flightNo = flightNo

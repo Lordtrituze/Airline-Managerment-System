@@ -1,16 +1,27 @@
 from repositories.booking import Booking
+from services.passengermanager import PassengerManager
+from services.flightmanager import  FlightManager
 class BookingManager():
     bookings = []
 
-    def createBooking(self, passenger, flight, ticktype, tickclass, regNo):
-        b = Booking(passenger, flight, ticktype, tickclass, regNo)
-        self.bookings.append(b)
+    def __init__(self, passenger, flight):
+        self.passenger: PassengerManager = passenger
+        self.flight: FlightManager = flight
+
+    def createBooking(self, passenger, flightNo, ticktype, tickclass, regNo):
+        p = self.passenger.search(passenger)
+        f = self.flight.search(flightNo)
+        if p and f:
+            b = Booking(passenger, flightNo, ticktype, tickclass, regNo)
+            self.bookings.append(b)
+        else:
+            print("Either the Passenger or Flight you entered does not exist")
 
     def show(self, b):
-        print(f'{b.passenger}\t\t{b.flight}\t\t{b.ticktype}\t\t\t{b.tickclass}\t\t\t{b.regNo}')
+        print(f'{b.passenger}\t\t{b.flightNo}\t\t{b.ticktype}\t\t\t{b.tickclass}\t\t\t{b.regNo}')
 
     def printAll(self):
-        print(f'Passenger\t\tFlight\t\tTicketType\t\t\tTicketClass\t\t\tRegNo')
+        print(f'Passenger\t\tFlightNo\t\tTicketType\t\t\tTicketClass\t\t\tRegNo')
         for b in self.bookings:
             self.show(b)
 

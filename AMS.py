@@ -1,7 +1,10 @@
-from services.aircraftmanager import *
-from services.passengermanager import *
 from services.flightmanager import *
 from services.bookingmanager import *
+
+aircraftManager = AircraftManager()
+flightManager = FlightManager(aircraftManager)
+passengerManager = PassengerManager()
+bookingManager = BookingManager(passengerManager, flightManager)
 
 flag = True
 while flag:
@@ -33,22 +36,21 @@ while flag:
                     name = input("Enter The name of the Aircraft \n :")
                     model = input("Enter the model of the Aircraft \n :")
                     capacity = input("Enter the capacity of the Aircraft \n :")
-                    # regNo = input("Enter the Registration Number \n :")
-                    AircraftManager().createCraft(name, model, capacity)
+                    aircraftManager.createCraft(name, model, capacity)
                 elif menuOption == 2:
                     regNo = input("Enter the Registration Number of the Aircraft you're looking for \n :")
-                    AircraftManager().search(regNo)
+                    aircraftManager.search(regNo)
                 elif menuOption == 3:
                     regNo = input("Enter the Registration Number of the Aircraft you want to Update \n :")
                     name = input("Enter The  new name of the Aircraft \n :")
                     model = input("Enter the new model of the Aircraft \n :")
                     capacity = input("Enter the new capacity of the Aircraft \n :")
-                    AircraftManager().update(name, model, capacity, regNo)
+                    aircraftManager.update(name, model, capacity, regNo)
                 elif menuOption == 4:
                     regNo = input("Enter the Registration Number of the Aircraft you want to Delete \n :")
-                    AircraftManager().delete(regNo)
+                    aircraftManager.delete(regNo)
                 elif menuOption == 5:
-                    AircraftManager().printAll()
+                    aircraftManager.printAll()
                 elif menuOption == 0:
                     mainMenu()
                 else:
@@ -72,24 +74,23 @@ while flag:
                     destination = input("Enter the destination of the Flight \n :")
                     date = input("Enter the date \n :")
                     time = input("Enter the time \n :")
-                    regNo = input("Enter the Registration Number \n :")
-                    FlightManager().createFlight(aircraft, takeoffloc, destination, date, time, regNo)
+                    flightManager.createFlight(aircraft, takeoffloc, destination, date, time)
                 elif menuOption == 2:
-                    regNo = input("Enter the Registration Number of the Flight you're looking for \n :")
-                    FlightManager().search(regNo)
+                    flightNo = int(input("Enter the Flight Number of the Flight you're looking for \n :"))
+                    flightManager.search(flightNo)
                 elif menuOption == 3:
-                    regNo = input("Enter the Registration Number of the Flight you want to Update \n :")
+                    flightNo = input("Enter the Flight Number of the Flight you want to Update \n :")
                     aircraft = input("Enter The aircraft of the Flight \n :")
                     takeoffloc = input("Enter the takeoffloc of the Flight \n :")
                     destination = input("Enter the destination of the Flight \n :")
                     date = input("Enter the date \n :")
                     time = input("Enter the time \n :")
-                    FlightManager().update(aircraft, takeoffloc, destination, date, time, regNo)
+                    flightManager.update(aircraft, takeoffloc, destination, date, time, flightNo)
                 elif menuOption == 4:
                     regNo = input("Enter the Registration Number of the Flight you want to Delete \n :")
-                    FlightManager().delete(regNo)
+                    flightManager.delete(regNo)
                 elif menuOption == 5:
-                    FlightManager().printAll()
+                    flightManager.printAll()
                 elif menuOption == 0:
                     mainMenu()
                 else:
@@ -109,26 +110,26 @@ while flag:
                     :"""))
                 if menuOption == 1:
                     passenger = input("Enter The name of the Passenger booking the flight \n : ")
-                    flight = input("Enter the Registration Number of the Flight you want to Book \n : ")
+                    flightNo = input("Enter the Flight Number of the Flight you want to Book \n : ")
                     ticktype = input("Which Ticket Type do you want to Book? \n (ONE-WAY) or (RETURN): ")
                     tickclass = input("Which Ticket Class are you Booking? \n (FIRST CLASS), (BUSINESS CLASS), or (ECONOMY): ")
                     regNo = input("Enter the Registration Number \n :")
-                    BookingManager().createBooking(passenger, flight, ticktype, tickclass, regNo)
+                    bookingManager.createBooking(passenger, flightNo, ticktype, tickclass, regNo)
                 elif menuOption == 2:
                     regNo = input("Enter the Registration Number of the Booking you're looking for \n : ")
-                    BookingManager().search(regNo)
+                    bookingManager.search(regNo)
                 elif menuOption == 3:
                     regNo = input("Enter the Registration Number of the Booking you want to Update \n :")
                     passenger = input("Enter The  new passenger Booking the flight \n :")
                     flight = input("Enter the Registration Number of the Flight you want to Book \n : ")
                     ticktype = input("Which Ticket Type do you want to Book? \n (ONE-WAY) or (RETURN): ")
                     tickclass = input("Which Ticket Class are you Booking? \n (FIRST CLASS), (BUSINESS CLASS), or (ECONOMY): ")
-                    BookingManager().update(passenger, flight, ticktype, tickclass, regNo)
+                    bookingManager.update(passenger, flight, ticktype, tickclass, regNo)
                 elif menuOption == 4:
                     regNo = input("Enter the Registration Number of the Booking you want to Delete \n :")
-                    BookingManager().delete(regNo)
+                    bookingManager.delete(regNo)
                 elif menuOption == 5:
-                    BookingManager().printAll()
+                    bookingManager.printAll()
                 elif menuOption == 0:
                     mainMenu()
                 else:
@@ -151,21 +152,21 @@ while flag:
                     email = input("Enter the email of the Passenger \n :")
                     address = input("Enter the address of the Passenger \n :")
                     regNo = input("Enter the Registration Number \n :")
-                    PassengerManager().createPassenger(name, email, address, regNo)
+                    passengerManager.createPassenger(name, email, address, regNo)
                 elif menuOption == 2:
                     regNo = input("Enter the Registration Number of the Passenger you're looking for \n :")
-                    PassengerManager().search(regNo)
+                    passengerManager.search(regNo)
                 elif menuOption == 3:
                     regNo = input("Enter the Registration Number of the Passenger you want to Update \n :")
                     name = input("Enter The  new name of the Passenger \n :")
                     email = input("Enter the new email of the Passenger \n :")
                     address = input("Enter the new address of the Passenger \n :")
-                    PassengerManager().update(name, email, address, regNo)
+                    passengerManager.update(name, email, address, regNo)
                 elif menuOption == 4:
                     regNo = input("Enter the Registration Number of the Passenger you want to Delete \n :")
-                    PassengerManager().delete(regNo)
+                    passengerManager.delete(regNo)
                 elif menuOption == 5:
-                    PassengerManager().printAll()
+                    passengerManager.printAll()
                 elif menuOption == 0:
                     mainMenu()
                 else:
