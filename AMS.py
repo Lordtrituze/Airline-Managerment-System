@@ -13,8 +13,8 @@ while flag:
             Airline Management Menu
             Enter (1) to Manage Aircrafts
             Enter (2) to Manage Flights
-            Enter (3) to Manage Bookings
-            Enter (4) to Manage Passengers
+            Enter (3) to Manage Passengers
+            Enter (4) to Manage Bookings
             Enter (0) to Exit Menu
             :"""))
 
@@ -95,8 +95,43 @@ while flag:
                     mainMenu()
                 else:
                     print("Please enter a valid option")
-
         elif menuOption == 3:
+            flag = True
+            while flag:
+                menuOption = int(input(f"""
+                    Passenger Management Menu
+                    Enter (1) to Create Passenger
+                    Enter (2) to Search Passenger
+                    Enter (3) to Update Passenger
+                    Enter (4) to Delete Passenger
+                    Enter (5) to Print All Passengers
+                    Enter (0) to Exit Main-Menu
+                    :"""))
+                if menuOption == 1:
+                    name = input("Enter The name of the Passenger \n :")
+                    email = input("Enter the email of the Passenger \n :")
+                    address = input("Enter the address of the Passenger \n :")
+                    regNo = input("Enter the Registration Number \n :")
+                    passengerManager.createPassenger(name, email, address, regNo)
+                elif menuOption == 2:
+                    regNo = input("Enter the Registration Number of the Passenger you're looking for \n :")
+                    passengerManager.search(regNo)
+                elif menuOption == 3:
+                    regNo = input("Enter the Registration Number of the Passenger you want to Update \n :")
+                    name = input("Enter The  new name of the Passenger \n :")
+                    email = input("Enter the new email of the Passenger \n :")
+                    address = input("Enter the new address of the Passenger \n :")
+                    passengerManager.update(name, email, address, regNo)
+                elif menuOption == 4:
+                    regNo = input("Enter the Registration Number of the Passenger you want to Delete \n :")
+                    passengerManager.delete(regNo)
+                elif menuOption == 5:
+                    passengerManager.printAll()
+                elif menuOption == 0:
+                    mainMenu()
+                else:
+                    print("Please enter a valid option")
+        elif menuOption == 4:
             flag = True
             while flag:
                 menuOption = int(input(f"""
@@ -135,40 +170,4 @@ while flag:
                 else:
                     print("Please enter a valid option")
 
-        elif menuOption == 4:
-            flag = True
-            while flag:
-                menuOption = int(input(f"""
-                    Passenger Management Menu
-                    Enter (1) to Create Passenger
-                    Enter (2) to Search Passenger
-                    Enter (3) to Update Passenger
-                    Enter (4) to Delete Passenger
-                    Enter (5) to Print All Passengers
-                    Enter (0) to Exit Main-Menu
-                    :"""))
-                if menuOption == 1:
-                    name = input("Enter The name of the Passenger \n :")
-                    email = input("Enter the email of the Passenger \n :")
-                    address = input("Enter the address of the Passenger \n :")
-                    regNo = input("Enter the Registration Number \n :")
-                    passengerManager.createPassenger(name, email, address, regNo)
-                elif menuOption == 2:
-                    regNo = input("Enter the Registration Number of the Passenger you're looking for \n :")
-                    passengerManager.search(regNo)
-                elif menuOption == 3:
-                    regNo = input("Enter the Registration Number of the Passenger you want to Update \n :")
-                    name = input("Enter The  new name of the Passenger \n :")
-                    email = input("Enter the new email of the Passenger \n :")
-                    address = input("Enter the new address of the Passenger \n :")
-                    passengerManager.update(name, email, address, regNo)
-                elif menuOption == 4:
-                    regNo = input("Enter the Registration Number of the Passenger you want to Delete \n :")
-                    passengerManager.delete(regNo)
-                elif menuOption == 5:
-                    passengerManager.printAll()
-                elif menuOption == 0:
-                    mainMenu()
-                else:
-                    print("Please enter a valid option")
     mainMenu()
