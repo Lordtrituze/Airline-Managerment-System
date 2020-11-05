@@ -64,7 +64,7 @@ while flag:
                     Enter (3) to Update Flight
                     Enter (4) to Delete Flight
                     Enter (5) to Print All Flights
-                    Enter (0) to Exit Menu
+                    Enter (0) to Exit Main-Menu
                     :"""))
                 if menuOption == 1:
                     aircraft = input("Enter The aircraft of the Flight \n :")
@@ -105,7 +105,7 @@ while flag:
                     Enter (3) to Update Booking
                     Enter (4) to Delete Booking
                     Enter (5) to Print All Bookings
-                    Enter (0) to Exit Menu
+                    Enter (0) to Exit Main-Menu
                     :"""))
                 if menuOption == 1:
                     passenger = input("Enter The name of the Passenger booking the flight \n : ")
@@ -144,7 +144,7 @@ while flag:
                     Enter (3) to Update Passenger
                     Enter (4) to Delete Passenger
                     Enter (5) to Print All Passengers
-                    Enter (0) to Exit Menu
+                    Enter (0) to Exit Main-Menu
                     :"""))
                 if menuOption == 1:
                     name = input("Enter The name of the Passenger \n :")
