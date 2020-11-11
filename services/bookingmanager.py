@@ -1,27 +1,65 @@
 from repositories.booking import Booking
 from services.passengermanager import PassengerManager
 from services.flightmanager import  FlightManager
+from services.aircraftmanager import AircraftManager
+import os.path
 class BookingManager():
     bookings = []
+    seat = []
 
-    def __init__(self, passenger, flight):
+    def __init__(self, passenger, flight, aircraft):
         self.passenger: PassengerManager = passenger
         self.flight: FlightManager = flight
+        self.aircraft: AircraftManager = aircraft
 
     def createBooking(self, passenger, flightNo, ticktype, tickclass, regNo):
+        if passenger == "" or passenger == None:
+            print("Passenger can't be empty")
+            return passenger
+        elif flightNo == "" or flightNo == None:
+            print("Flight Number can't be empty")
+            return flightNo
+        elif ticktype == "" or ticktype == None:
+            print("Ticket Type can't be empty")
+            return ticktype
+        elif tickclass == "" or tickclass == None:
+            print("Ticket Class can't be empty")
+            return tickclass
+        else:
+            pass
         p = self.passenger.search(passenger)
         f = self.flight.search(flightNo)
+        flightaircraft = f.aircraft
+        aircraft = self.aircraft.search(flightaircraft)
+        capacity = int(aircraft.capacity)
+        seatNo = len(self.seat)
         if p and f:
-            b = Booking(passenger, flightNo, ticktype, tickclass, regNo)
+            if seatNo == capacity:
+                print("Sorry, the Airplane is full")
+
+            else:
+                seatNo += 1
+            b = Booking(passenger, flightNo, ticktype, tickclass, regNo, seatNo)
+            self.seat.append(b.passenger)
+            strb = f'{b.passenger}\t\t{b.flightNo}\t\t{b.ticktype}\t\t\t{b.tickclass}\t\t\t{b.regNo}\t\t{b.seatNo}\n'
+            if os.path.isfile("../files/bookings.txt"):
+                bookingfile = open("../files/bookings.txt", "a")
+                bookingfile.write(strb)
+                bookingfile.close()
+            else:
+                bookingfile = open("../files/bookings.txt", "w")
+                bookingfile.write(f'Passenger\t\tFlightNo\t\tTicketType\t\t\tTicketClass\t\t\tRegNo\t\tSeatNo\n')
+                bookingfile.write(strb)
+                bookingfile.close()
             self.bookings.append(b)
         else:
             print("Either the Passenger or Flight you entered does not exist")
 
     def show(self, b):
-        print(f'{b.passenger}\t\t{b.flightNo}\t\t{b.ticktype}\t\t\t{b.tickclass}\t\t\t{b.regNo}')
+        print(f'{b.passenger}\t\t{b.flightNo}\t\t{b.ticktype}\t\t\t{b.tickclass}\t\t\t{b.regNo}\t\t{b.seatNo}')
 
     def printAll(self):
-        print(f'Passenger\t\tFlightNo\t\tTicketType\t\t\tTicketClass\t\t\tRegNo')
+        print(f'Passenger\t\tFlightNo\t\tTicketType\t\t\tTicketClass\t\t\tRegNo\t\tSeatNo')
         for b in self.bookings:
             self.show(b)
 
@@ -31,6 +69,8 @@ class BookingManager():
                 if b.regNo == regNo:
                     self.show(b)
                     return b
+            else:
+                print('There is no Booking with the Registration Number you entered')
         except ValueError:
             print('There is no Booking with the Registration Number you entered')
 
