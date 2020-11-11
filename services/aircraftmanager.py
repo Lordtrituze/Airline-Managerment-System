@@ -22,24 +22,28 @@ class AircraftManager:
         str1, str2, str3 = model[:3], capacity, str(random.randint(1, 999))
         regNo = f"{str1}/{str2}/{str3}"
         a = Aircraft(name, model, capacity, regNo)
-        stra = f'{a.name}\t\t{a.model}\t\t{a.capacity}\t\t{a.regNo}\n'
+        stra = f'{a.name:<10}\t{a.model:<10}\t{a.capacity:<10}\t{a.regNo:<10}\n'
         if os.path.isfile("../files/aircrafts.txt"):
-            aircraftfile = open("../files/aircrafts.txt", "a")
-            aircraftfile.write(stra)
-            aircraftfile.close()
+            with open("../files/aircrafts.txt", "a") as aircraftfile:
+                aircraftfile.write(stra)
         else:
             aircraftfile = open("../files/aircrafts.txt", "w")
-            aircraftfile.write(f'Name\t\tModel\t\tCapacity\t\tRegNo\n')
+            aircraftfile.write(f'{"Name":<10}\t{"Model":<10}\t{"Capacity":<10}\t{"RegNo":<10}\n')
             aircraftfile.write(stra)
             aircraftfile.close()
 
         self.aircrafts.append(a)
 
     def show(self, a):
-        print(f'{a.name}\t\t\t{a.model}\t\t\t{a.capacity}\t\t\t{a.regNo}')
+        try:
+            print(f'{a.name:<10}\t{a.model:<10}\t{a.capacity:<10}\t{a.regNo:<10}')
+        except ValueError or AttributeError:
+            for i in self.aircrafts:
+                if i.regNo == a:
+                    self.show(i)
 
     def printAll(self):
-        print(f'Name\t\t\tModel\t\t\tCapacity\t\t\tRegNo')
+        print(f'{"Name":<10}\t{"Model":<10}\t{"Capacity":<10}\t{"RegNo":<10}')
         for a in self.aircrafts:
             self.show(a)
 
@@ -48,7 +52,7 @@ class AircraftManager:
         try:
             for a in self.aircrafts:
                 if a.regNo == regNo or a.name == regNo:
-                    self.show(a)
+                    # self.show(a)
                     return a
             else:
                 print('There is no Aircraft with the Registration Number you entered')

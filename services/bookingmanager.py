@@ -41,14 +41,14 @@ class BookingManager():
                 seatNo += 1
             b = Booking(passenger, flightNo, ticktype, tickclass, regNo, seatNo)
             self.seat.append(b.passenger)
-            strb = f'{b.passenger}\t\t{b.flightNo}\t\t{b.ticktype}\t\t\t{b.tickclass}\t\t\t{b.regNo}\t\t{b.seatNo}\n'
+            strb = f'{b.passenger:<10}\t{b.flightNo:<10}\t{b.ticktype:<10}\t{b.tickclass:<10}\t{b.regNo:<10}\t{b.seatNo:<10}\n'
             if os.path.isfile("../files/bookings.txt"):
                 bookingfile = open("../files/bookings.txt", "a")
                 bookingfile.write(strb)
                 bookingfile.close()
             else:
                 bookingfile = open("../files/bookings.txt", "w")
-                bookingfile.write(f'Passenger\t\tFlightNo\t\tTicketType\t\t\tTicketClass\t\t\tRegNo\t\tSeatNo\n')
+                bookingfile.write(f'{"Passenger":<10}\t{"FlightNo":<10}\t{"Ticktype":<10}\t{"Tickclass":<10}\t{"RegNo":<10}\t{"SeatNo":<10}\n')
                 bookingfile.write(strb)
                 bookingfile.close()
             self.bookings.append(b)
@@ -56,10 +56,10 @@ class BookingManager():
             print("Either the Passenger or Flight you entered does not exist")
 
     def show(self, b):
-        print(f'{b.passenger}\t\t{b.flightNo}\t\t{b.ticktype}\t\t\t{b.tickclass}\t\t\t{b.regNo}\t\t{b.seatNo}')
+        print(f'{b.passenger:<10}\t{b.flightNo:<10}\t{b.ticktype:<10}\t{b.tickclass:<10}\t{b.regNo:<10}\t{b.seatNo:<10}')
 
     def printAll(self):
-        print(f'Passenger\t\tFlightNo\t\tTicketType\t\t\tTicketClass\t\t\tRegNo\t\tSeatNo')
+        print(f'{"Passenger":<10}\t{"FlightNo":<10}\t{"Ticktype":<10}\t{"Tickclass":<10}\t{"RegNo":<10}\t{"SeatNo":<10}')
         for b in self.bookings:
             self.show(b)
 

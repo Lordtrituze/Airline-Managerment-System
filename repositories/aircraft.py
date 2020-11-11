@@ -10,5 +10,5 @@ class Aircraft:
         self.regNo = regNo
 
     def __str__(self):
-        description = (self.name, self.model, self.capacity, self.regNo)
+        description = f"{self.name},{self.model}, {self.capacity}, {self.regNo}"
         return  description

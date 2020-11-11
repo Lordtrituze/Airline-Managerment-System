@@ -86,6 +86,8 @@ def aircraftMenu(menuOption):
     elif menuOption == 2:
         regNo = input("Enter the Registration Number of the Aircraft you're looking for \n :")
         aircraftManager.search(regNo)
+        while aircraftManager.search(regNo):
+            aircraftManager.show(regNo)
         request()
     elif menuOption == 3:
         regNo = input("Enter the Registration Number of the Aircraft you want to Update \n :")
@@ -182,7 +184,7 @@ def passengerMenu(menuOption):
         print("Please enter a valid option")
         subMenu(3)
 
-#Booking        
+#Booking
 def bookingMenu(menuOption):
     if menuOption == 1:
         passenger = input("Enter The name of the Passenger booking the flight \n : ")

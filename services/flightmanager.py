@@ -32,14 +32,14 @@ class FlightManager:
         if a:
             self.flightNo += 1
             f = Flight(aircraft, takeoffloc, destination, date, time, self.flightNo)
-            strf = f'{f.aircraft}\t\t{f.takeoffloc}\t\t{f.destination}\t\t{f.date}\t\t{f.time}\t\t\t{f.flightNo}\n'
+            strf = f'{f.aircraft:<10}\t{f.takeoffloc:<10}\t{f.destination:<10}\t{f.date:<10}\t{f.time:<10}\t{f.flightNo:<10}\n'
             if os.path.isfile("../files/flights.txt"):
                 flightfile = open("../files/flights.txt", "a")
                 flightfile.write(strf)
                 flightfile.close()
             else:
                 flightfile = open("../files/flights.txt", "w")
-                flightfile.write(f'Aircraft\t\tTakeoffloc\t\tDestination\t\tDate\t\tTime\t\t\tFlightNo\n')
+                flightfile.write(f'{"Aircraft":<10}\t{"Takeoffloc":<10}\t{"Destination":<10}\t{"Date":<10}\t{"Time":<10}\t{"FlightNo":<10}\n')
                 flightfile.write(strf)
                 flightfile.close()
             self.flight.append(f)
@@ -47,10 +47,10 @@ class FlightManager:
             print('No record for the given aircraft')
 
     def show(self, f):
-        print(f'{f.aircraft}\t\t{f.takeoffloc}\t\t{f.destination}\t\t{f.date}\t\t{f.time}\t\t\t{f.flightNo}')
+        print(f'{f.aircraft:<10}\t{f.takeoffloc:<10}\t{f.destination:<10}\t{f.date:<10}\t{f.time:<10}\t{f.flightNo:<10}')
 
     def printAll(self):
-        print(f'Aircraft\t\tTakeoffloc\t\tDestination\t\tDate\t\tTime\t\t\tFlightNo')
+        print(f'{"Aircraft":<10}\t{"Takeoffloc":<10}\t{"Destination":<10}\t{"Date":<10}\t{"Time":<10}\t{"FlightNo":<10}')
         for f in self.flight:
             self.show(f)
 
@@ -59,7 +59,7 @@ class FlightManager:
         try:
             for f in self.flight:
                 if f.flightNo == int(flightNo):
-                    print(f'Aircraft\t\tTakeoffloc\t\tDestination\t\tDate\t\tTime\t\t\tFlightNo')
+                    print(f'{"Aircraft":<10}\t{"Takeoffloc":<10}\t{"Destination":<10}\t{"Date":<10}\t{"Time":<10}\t{"FlightNo":<10}')
                     self.show(f)
                     return f
             else:
