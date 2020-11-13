@@ -92,6 +92,7 @@ def aircraftMenu(menuOption):
         request()
         subMenu(1)
     elif menuOption == 3:
+        aircraftManager.printAll()
         regNo = input("Enter the Registration Number or Name of the Aircraft you want to Update \n :")
         name = input("Enter The  new name of the Aircraft \n :")
         model = input("Enter the new model of the Aircraft \n :")
@@ -136,6 +137,7 @@ def flightMenu(menuOption):
         subMenu(2)
 
     elif menuOption == 3:
+        flightManager.printAll()
         flightNo = input(
             "Enter the Flight Number of the Flight you want to Update \n :")
         aircraft = input("Enter The aircraft of the Flight \n :")
@@ -182,6 +184,7 @@ def passengerMenu(menuOption):
         request()
         subMenu(3)
     elif menuOption == 3:
+        passengerManager.printAll()
         regNo = input("Enter the Registration Number or Name of the Passenger you want to Update \n :")
         name = input("Enter The  new name of the Passenger \n :")
         email = input("Enter the new email of the Passenger \n :")
@@ -224,6 +227,7 @@ def bookingMenu(menuOption):
         request()
         subMenu(4)
     elif menuOption == 3:
+        bookingManager.printAll()
         regNo = input("Enter the Registration Number of the Booking you want to Update \n :")
         passenger = input("Enter The  new passenger Booking the flight \n :")
         flight = input("Enter the Registration Number of the Flight you want to Book \n : ")

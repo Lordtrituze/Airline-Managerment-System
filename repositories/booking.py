@@ -14,5 +14,5 @@ class Booking:
         self.seatNo = seatNo
 
     def __str__(self):
-        description = f"{self.passenger} {self.flightNo} {self.ticktype} {self.tickclass} {self.regNo} {self.seatNo}"
+        description = f"{self.passenger:<10}\t{self.flightNo:<10}\t{self.ticktype:<10}\t{self.tickclass:<10}\t{self.regNo:<10}\t{self.seatNo:<10}"
         return  description

@@ -87,6 +87,7 @@ class BookingManager():
             b.tickclass = tickclass
             print("UPDATED!")
             self.show(b)
+            self.save()
         except ValueError or AttributeError:
             return
 

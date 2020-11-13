@@ -86,6 +86,7 @@ class FlightManager:
             f.time = time
             print("UPDATED!")
             self.show(f)
+            self.save()
         except ValueError or AttributeError:
             return
 

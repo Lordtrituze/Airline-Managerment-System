@@ -10,5 +10,5 @@ class Passenger:
         self.regNo = regNo
 
     def __str__(self):
-        description = f"{self.name} {self.email} {self.address} {self.regNo}"
+        description = f"{self.name:<10}\t{self.email:<10}\t{self.address:<10}\t{self.regNo:<10}"
         return description

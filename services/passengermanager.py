@@ -65,6 +65,7 @@ class PassengerManager():
             p.address = address
             print("UPDATED!")
             self.show(p)
+            self.save()
         except ValueError or AttributeError:
             return
 

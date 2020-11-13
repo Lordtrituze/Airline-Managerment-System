@@ -75,6 +75,7 @@ class AircraftManager:
             a.capacity = capacity
             print("UPDATED!")
             self.show(a)
+            self.save()
         except ValueError or AttributeError:
             return
 
