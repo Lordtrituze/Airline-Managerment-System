@@ -12,3 +12,7 @@ class Booking:
         self.tickclass = tickclass
         self.regNo = regNo
         self.seatNo = seatNo
+
+    def __str__(self):
+        description = f"{self.passenger} {self.flightNo} {self.ticktype} {self.tickclass} {self.regNo} {self.seatNo}"
+        return  description
