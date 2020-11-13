@@ -13,3 +13,7 @@ class Flight:
         self.date = date
         self.time = time
         self.flightNo = flightNo
+
+    def __str__(self):
+        description = f"{self.aircraft} {self.takeoffloc} {self.destination} {self.date} {self.time} {self.flightNo}"
+        return  description

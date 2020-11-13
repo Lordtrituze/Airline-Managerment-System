@@ -1,7 +1,19 @@
 from repositories.passenger import Passenger
-import os.path
+
 class PassengerManager():
     passengers = []
+    def __init__(self):
+        with open("../files/passengers.txt", "rt") as passengerfile:
+            next(passengerfile)
+            for read in passengerfile.readlines():
+                read = read.split()
+                # print(read)
+                name = read[0]
+                email = read[1]
+                address = read[2]
+                regNo = read[3]
+                p = Passenger(name, email, address, regNo)
+                self.passengers.append(p)
     def createPassenger(self, name, email, address, regNo):
         if name == "" or name == None:
             print("Name can't be empty")
@@ -18,19 +30,15 @@ class PassengerManager():
         else:
             pass
         p = Passenger(name, email, address, regNo)
-        strp = f'{p.name:<10}\t{p.email:<10}\t{p.address:<10}\t{p.regNo:<10}\n'
-        if os.path.isfile("../files/passengers.txt"):
-            passengerfile = open("../files/passengers.txt", "a")
-            passengerfile.write(strp)
-            passengerfile.close()
-        else:
-            passengerfile = open("../files/passengers.txt", "w")
-            passengerfile.write(f'{"Name":<10}\t{"Email":<10}\t{"Address":<10}\t{"RegNo":<10}\n')
-            passengerfile.write(strp)
-            passengerfile.close()
         self.passengers.append(p)
+        self.save()
     def show(self, p):
-        print(f'{p.name:<10}\t{p.email:<10}\t{p.address:<10}\t{p.regNo:<10}')
+        try:
+            print(f'{p.name:<10}\t{p.email:<10}\t{p.address:<10}\t{p.regNo:<10}')
+        except ValueError or AttributeError:
+            for i in self.passengers:
+                if i.regNo == p:
+                    self.show(i)
 
     def printAll(self):
         print(f'{"Name":<10}\t{"Email":<10}\t{"Address":<10}\t{"RegNo":<10}')
@@ -42,7 +50,7 @@ class PassengerManager():
         try:
             for p in self.passengers:
                 if p.regNo == regNo or p.name == regNo:
-                    self.show(p)
+                    # self.show(p)
                     return p
             else:
                 print('There is no Passenger with the Registration Number you entered')
@@ -50,12 +58,15 @@ class PassengerManager():
             print('There is no Passenger with the Registration Number you entered')
 
     def update(self, name, email, address, regNo):
-        p = self.search(regNo)
-        p.name = name
-        p.email = email
-        p.address = address
-        print("UPDATED!")
-        self.show(p)
+        try:
+            p = self.search(regNo)
+            p.name = name
+            p.email = email
+            p.address = address
+            print("UPDATED!")
+            self.show(p)
+        except ValueError or AttributeError:
+            return
 
     def delete(self, regNo):
         try:
@@ -64,3 +75,12 @@ class PassengerManager():
             print("DELETED!")
         except ValueError:
             print('There is no Passenger with the Registration Number you entered')
+
+    def save(self):
+        with open("../files/passengers.txt", "w+") as passengerfile:
+            passengerfile.write(f'{"Name":<10}\t{"Email":<10}\t{"Address":<10}\t{"RegNo":<10}\n')
+            for p in self.passengers:
+                passengerfile.write(str(p) + "\n")
+
+
+

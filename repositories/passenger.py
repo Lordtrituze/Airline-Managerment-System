@@ -10,5 +10,5 @@ class Passenger:
         self.regNo = regNo
 
     def __str__(self):
-        description = f"{self.name}'s id is {self.regNo} and email is {self.email} and address is {self.address}"
+        description = f"{self.name} {self.email} {self.address} {self.regNo}"
         return description
