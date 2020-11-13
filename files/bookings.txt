@@ -1,0 +1,1 @@
+Passenger 	FlightNo  	Ticktype  	Tickclass 	RegNo     	SeatNo    
